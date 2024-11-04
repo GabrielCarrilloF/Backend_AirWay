@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('authentication', function (Blueprint $table) {
+         Schema::create('plan', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('user_name');
-            $table->string('password');
-            $table->string('suppliers')->nullable();
-            $table->date('creation_date')->nullable();
-            $table->date('last_access_date')->nullable();
-            $table->string('state')->nullable();
+            $table->string('plan_name');
+            $table->decimal('percentage_fee', 5, 2)->nullable();
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('authentication');
+        Schema::dropIfExists('plan');
     }
 };

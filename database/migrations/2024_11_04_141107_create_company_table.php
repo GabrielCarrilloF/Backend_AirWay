@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('id')->primary()->default(DB::raw('(uuid())'));
-            $table->uuid('id_authen')->nullable(); // Llave foranea a `authentication`
-            $table->uuid('plan_id')->nullable(); // Llave foranea a `plan`
-            $table->string('name', 255);
-            $table->string('email', 255)->nullable();
-            $table->string('phone_number', 20)->nullable();
+         Schema::create('company', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('id_authen')->nullable();
+            $table->uuid('plan_id')->nullable();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('phone_number')->nullable();
             $table->text('address')->nullable();
-            $table->string('contact_person', 255)->nullable();
+            $table->string('contact_person')->nullable();
             $table->date('registered_date')->nullable();
+            $table->timestamps();
 
+            
             $table->foreign('id_authen')->references('id')->on('authentication')->onDelete('set null');
             $table->foreign('plan_id')->references('id')->on('plan')->onDelete('set null');
-            $table->timestamps();
         });
     }
 
