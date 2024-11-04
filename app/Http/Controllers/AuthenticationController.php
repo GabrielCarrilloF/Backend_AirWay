@@ -30,12 +30,12 @@ class AuthenticationController extends Controller
 
     public function edit(authentication $authentication)
     {
-        //
+        
     }
 
     public function update(Request $request, authentication $authentication)
     {
-        //
+        
     }
 
     public function destroy(authentication $authentication)
