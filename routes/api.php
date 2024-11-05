@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/companies', function () {
-    return 'Lista de companies';
-});
+use App\Http\Controllers\CompanyController;
+
+Route::get('/companies', [CompanyController::class, 'index']);
 
 Route::get('/companies/{id}', function () {
     return 'una sola companie';
