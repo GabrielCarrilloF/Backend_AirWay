@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authentication', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('user_name');
-            $table->string('password');
+            $table->string('passaword');
             $table->string('suppliers')->nullable();
             $table->date('creation_date')->nullable();
             $table->date('last_access_date')->nullable();

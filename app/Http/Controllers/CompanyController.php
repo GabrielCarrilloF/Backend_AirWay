@@ -53,6 +53,7 @@ class CompanyController extends Controller
             return response()->json($data, 400);
         } else {
             $company = Company::create([
+                'id'=> $request->id,
                 'id_authen' => $request->id_authen,
                 'plan_id' => $request->plan_id,
                 'name' => $request->name,

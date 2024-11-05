@@ -4,12 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\AuthenticationController;
 
 Route::get('/companies', [CompanyController::class, 'index']);
 
-Route::get('/companies/{id}', function () {
-    return 'una sola companie';
-});
+Route::post('/aut', [AuthenticationController::class, 'store']);
 
 Route::post('/companies', [CompanyController::class, 'store']);
 
