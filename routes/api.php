@@ -11,9 +11,7 @@ Route::get('/companies/{id}', function () {
     return 'una sola companie';
 });
 
-Route::post('/companies', function () {
-    return 'crear';
-});
+Route::post('/companies', [CompanyController::class, 'store']);
 
 Route::put('/companies/{id}', function () {
     return 'actualizar';

@@ -15,7 +15,6 @@ class Company extends Model
         'email',
         'phone_number',
         'address',
-        'contact_person',
-        'registered_date'
+        'contact_person'
     ];
 }
