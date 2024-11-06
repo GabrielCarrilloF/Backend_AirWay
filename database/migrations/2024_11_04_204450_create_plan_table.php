@@ -13,10 +13,10 @@ return new class extends Migration
     {
          Schema::create('plan', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('plan_name');
-            $table->decimal('percentage_fee', 5, 2)->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('price', 10, 2)->nullable();
+            $table->string('plan_name')->unique();
+            $table->decimal('percentage_fee', 5, 2);  
+            $table->text('description');  
+            $table->decimal('price', 10, 2);  
             $table->timestamps();
         });
     }
