@@ -4,104 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 
 
 class CompanyController extends Controller
 {
     public function index()
     {
-        $company = Company::all();
-
-        if($company->isEmpty()){
-            $data = 
-            [
-                'message' => 'No hay Compañias',
-                'status' => 200
-            ];
-
-            return response()->json($data, 200);
-
-        }else{
-            $data = 
-            [
-                'companys' => $company,
-                'status' => 200
-            ];
-            return response()->json($data, 200);
-        }
+        $companies = Company::all();
+        return response()->json($companies, Response::HTTP_OK);
     }
 
     public function store(Request $request)
     {
-        $Validator = Validator::make($request->all(), [
-            'id_authen' => 'required',
-            'plan_id' => 'nullable',
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'address' => 'nullable',
-            'contact_person' => 'nullable'
+        $request->validate([
+            'name' => 'required|string|max:255|unique:company,name',
+            'email' => 'nullable|email|unique:company,email',
+            'phone_number' => 'required|string|max:255|unique:company,phone_number',
+            'address' => 'nullable|string',
+            'contact_person' => 'nullable|string|max:255',
+            'authen_id' => 'nullable|uuid|exists:authentication,id',
+            'plan_id' => 'nullable|uuid|exists:plan,id',
         ]);
 
-        if ($Validator->fails()) {
-            $data = [
-                'message' => 'Bad Request: Datos errados',
-                'error' => $Validator->errors(),
-                'status' => 400
-            ];
-            return response()->json($data, 400);
-        } else {
-            $company = Company::create([
-                'id'=> $request->id,
-                'id_authen' => $request->id_authen,
-                'plan_id' => $request->plan_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone_number' => $request->phone_number,
-                'address' => $request->address,
-                'contact_person' => $request->contact_person
-            ]);
+        $company = Company::create($request->all());
 
-            if (!$company) {
-                $data = [
-                    'message' => 'Internal Server Error: No se pudo crear una nueva compañía',
-                    'status' => 500
-                ];
-                return response()->json($data, 500);
-            } else {
-                $data = [
-                    'company' => $company,
-                    'status' => 201
-                ];
-                return response()->json($data, 201);
-            }
-        }
+        return response()->json($company, Response::HTTP_CREATED);
     }
 
-    public function create()
+    /**
+     * Muestra los detalles de una compañía específica.
+     */
+    public function show($name)
     {
-        //
+        $company = Company::findOrFail($name);
+        return response()->json($company, Response::HTTP_OK);
     }
 
-
-    public function show(Company $company)
+    /**
+     * Actualiza una compañía existente.
+     */
+    public function update(Request $request, $name)
     {
-        //
+        $company = Company::findOrFail($name);
+
+        $request->validate([
+            'email' => 'nullable|email|unique:company,email,' . $company->name . ',name',
+            'phone_number' => 'required|string|max:255|unique:company,phone_number,' . $company->name . ',name',
+            'address' => 'nullable|string',
+            'contact_person' => 'nullable|string|max:255',
+            'authen_id' => 'nullable|uuid|exists:authentication,id',
+            'plan_id' => 'nullable|uuid|exists:plan,id',
+        ]);
+
+        $company->update($request->all());
+
+        return response()->json($company, Response::HTTP_OK);
     }
 
-    public function edit(Company $company)
+    /**
+     * Elimina una compañía.
+     */
+    public function destroy($name)
     {
-        //
-    }
-
-    public function update(Request $request, Company $company)
-    {
-        //
-    }
-
-    public function destroy(Company $company)
-    {
-        //
+        
     }
 }

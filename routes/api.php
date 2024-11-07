@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AuthenticationController;
 
-Route::get('/companies', [CompanyController::class, 'index']);
+Route::apiResource('companies', CompanyController::class);
+
+//Route::get('/companies', [CompanyController::class, 'index']);
 
 Route::post('/aut', [AuthenticationController::class, 'store']);
 
