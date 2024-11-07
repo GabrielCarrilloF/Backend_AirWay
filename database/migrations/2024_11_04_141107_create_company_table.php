@@ -12,19 +12,17 @@ return new class extends Migration
     public function up(): void
     {
          Schema::create('company', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('id_authen')->nullable();
-            $table->uuid('plan_id')->nullable();
-            $table->string('name');
-            $table->string('email')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->text('address')->nullable();
-            $table->string('contact_person')->nullable();
-            $table->date('registered_date')->nullable();
-            $table->timestamps();
-
+            $table->string('name', 255)->primary();
+            $table->string('email', 255)->unique()->nullable(); 
+            $table->string('phone_number', 255)->unique(); 
+            $table->text('address')->nullable(); 
+            $table->string('contact_person', 255)->nullable(); 
+            $table->uuid('authen_id')->nullable(); 
+            $table->uuid('plan_id')->nullable(); 
+            $table->timestamps(0);
             
-            $table->foreign('id_authen')->references('id')->on('authentication')->onDelete('set null');
+            
+            $table->foreign('authen_id')->references('id')->on('authentication')->onDelete('set null');
             $table->foreign('plan_id')->references('id')->on('plan')->onDelete('set null');
         });
     }

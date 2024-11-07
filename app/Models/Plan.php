@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Authentication extends Model
+class Plan extends Model
 {
     use HasFactory;
 
-    protected $table = 'authentication';
+    protected $table = 'plan';
 
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -17,15 +17,14 @@ class Authentication extends Model
 
     protected $fillable = [
         'id',
-        'user_name',
-        'password',
-        'suppliers',
-        'last_access_date',
-        'state'
+        'plan_name',
+        'percentage_fee',
+        'description',
+        'price'
     ];
 
     public function companies()
     {
-        return $this->hasMany(Company::class, 'authen_id');
+        return $this->hasMany(Company::class, 'plan_id');
     }
 }

@@ -1,24 +1,35 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/companies', function () {
-    return 'Lista de companies';
-});
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PlanController;
 
-Route::get('/companies/{id}', function () {
-    return 'una sola companie';
-});
+Route::get('/companies', [CompanyController::class, 'index']);
 
-Route::post('/companies', function () {
-    return 'crear';
-});
+Route::get('/companies/{id}', [CompanyController::class, 'show']);
 
-Route::put('/companies/{id}', function () {
-    return 'actualizar';
-});
+Route::post('/companies/create', [CompanyController::class, 'store']);
 
-Route::delete('/companies/{id}', function () {
-    return 'eliminar';
-});
+Route::put('/companies/update/{id}', [CompanyController::class, 'update']);
+
+Route::patch('/companies/updatePatch/{id}', [CompanyController::class, 'updatePatch']);
+
+
+
+
+Route::get('/plan', [PlanController::class, 'index']);
+
+Route::get('/plan/{id}', [PlanController::class, 'show']);
+
+
+
+
+// Route::get('/auth', [AuthenticationController::class, 'index']);
+
+Route::post('/auth/create', [AuthenticationController::class, 'store']);
+
+Route::post('/auth/login', [AuthenticationController::class, 'authenticate']);
+
+Route::patch('/auth/update/{id}', [AuthenticationController::class, 'update']);
