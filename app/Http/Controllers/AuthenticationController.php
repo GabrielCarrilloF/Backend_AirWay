@@ -136,16 +136,14 @@ class AuthenticationController extends Controller
 
         'user_name' => 'sometimes|string', 
         'password' => [
-
-
-                                'sometimes',
-                                'string',
-                                'min:8',             
-                                'regex:/[a-z]/',      
-                                'regex:/[A-Z]/',      
-                                'regex:/[0-9]/',      
-                                'regex:/[@$!%*?&]/', 
-                            ], 
+                        'sometimes',
+                        'string',
+                        'min:8',             
+                        'regex:/[a-z]/',      
+                        'regex:/[A-Z]/',      
+                        'regex:/[0-9]/',      
+                        'regex:/[@$!%*?&]/', 
+                    ], 
         'last_access_date' => 'sometimes|date', 
         'state' => 'sometimes|string', 
     ]);

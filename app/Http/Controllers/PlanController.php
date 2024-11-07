@@ -3,63 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
-use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $plan = Plan::all();
+
+        if($plan->isEmpty()){
+            $data = 
+            [
+                'message' => 'No hay planes.',
+                'status' => 200
+            ];
+
+            return response()->json($data, 200);
+
+        }else{
+            $data = 
+            [
+                'planes' => $plan,
+                'status' => 200
+            ];
+            return response()->json($data, 200);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
-    }
+        $plan = Plan::find($id);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if (!$plan) {
+            return response()->json([
+                'message' => 'Pla no encontrado.',
+                'status' => 404
+            ], 404);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Plan $plan)
-    {
-        //
-    }
+        $data = [
+            'plan' => $plan,
+            'status' => 200
+        ];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Plan $plan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Plan $plan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Plan $plan)
-    {
-        //
+        return response()->json($data, 200);
     }
 }
