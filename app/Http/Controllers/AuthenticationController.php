@@ -15,7 +15,7 @@ class AuthenticationController extends Controller
     {
         $Validator = Validator::make($request->all(), [
             'user_name' => 'required',
-            'passaword' => 'required',
+            'password' => 'required',
             'suppliers' => 'required',
             'last_access_date' => 'required',
             'state' => 'required'
@@ -31,7 +31,7 @@ class AuthenticationController extends Controller
         } else {
             $user = authentication::create([
                 'user_name'=> $request->user_name,
-                'passaword' => $request->passaword,
+                'password' => $request->password,
                 'suppliers' => $request->suppliers,
                 'last_access_date' => $request->last_access_date,
                 'state' => $request->state

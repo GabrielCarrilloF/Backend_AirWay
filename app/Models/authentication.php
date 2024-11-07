@@ -9,8 +9,9 @@ class authentication extends Model
     protected $table = 'authentication';
 
     protected $fillable = [
+        'id',
         'user_name',
-        'passaword',
+        'password',
         'suppliers',
         'last_access_date',
         'state'
