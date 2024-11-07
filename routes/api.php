@@ -12,6 +12,10 @@ Route::post('/aut', [AuthenticationController::class, 'store']);
 
 Route::post('/companies', [CompanyController::class, 'store']);
 
+Route::get('/docs', function () {
+    return view('welcome');
+});
+
 Route::put('/companies/{id}', function () {
     return 'actualizar';
 });
