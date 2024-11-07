@@ -3,10 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class authentication extends Model
+class Authentication extends Model
 {
+    use HasFactory;
+
     protected $table = 'authentication';
+
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'id',
@@ -16,4 +23,9 @@ class authentication extends Model
         'last_access_date',
         'state'
     ];
+
+    public function companies()
+    {
+        return $this->hasMany(Company::class, 'authen_id');
+    }
 }

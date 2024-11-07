@@ -17,4 +17,11 @@ Route::put('/companies/{id}', [CompanyController::class, 'update']);
 Route::patch('/companies/{id}', [CompanyController::class, 'updatePatch']);
 
 
-Route::post('/aut', [AuthenticationController::class, 'store']);
+
+// Route::get('/auth', [AuthenticationController::class, 'index']);
+
+Route::post('/auth', [AuthenticationController::class, 'store']);
+
+
+
+Route::post('/auth/login', [AuthenticationController::class, 'authenticate']);
