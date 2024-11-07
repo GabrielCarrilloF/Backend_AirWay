@@ -4,69 +4,103 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 
 class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::all();
-        return response()->json($companies, Response::HTTP_OK);
+        $company = Company::all();
+
+        if($company->isEmpty()){
+            $data = 
+            [
+                'message' => 'No hay Compañias',
+                'status' => 200
+            ];
+
+            return response()->json($data, 200);
+
+        }else{
+            $data = 
+            [
+                'companys' => $company,
+                'status' => 200
+            ];
+            return response()->json($data, 200);
+        }
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:company,name',
-            'email' => 'nullable|email|unique:company,email',
-            'phone_number' => 'required|string|max:255|unique:company,phone_number',
-            'address' => 'nullable|string',
-            'contact_person' => 'nullable|string|max:255',
-            'authen_id' => 'nullable|uuid|exists:authentication,id',
-            'plan_id' => 'nullable|uuid|exists:plan,id',
-        ]);
-
-        $company = Company::create($request->all());
-
-        return response()->json($company, Response::HTTP_CREATED);
-    }
-
-    /**
-     * Muestra los detalles de una compañía específica.
-     */
-    public function show($name)
-    {
-        $company = Company::findOrFail($name);
-        return response()->json($company, Response::HTTP_OK);
-    }
-
-    /**
-     * Actualiza una compañía existente.
-     */
-    public function update(Request $request, $name)
-    {
-        $company = Company::findOrFail($name);
-
-        $request->validate([
-            'email' => 'nullable|email|unique:company,email,' . $company->name . ',name',
-            'phone_number' => 'required|string|max:255|unique:company,phone_number,' . $company->name . ',name',
-            'address' => 'nullable|string',
-            'contact_person' => 'nullable|string|max:255',
-            'authen_id' => 'nullable|uuid|exists:authentication,id',
-            'plan_id' => 'nullable|uuid|exists:plan,id',
-        ]);
-
-        $company->update($request->all());
-
-        return response()->json($company, Response::HTTP_OK);
-    }
-
-    /**
-     * Elimina una compañía.
-     */
-    public function destroy($name)
-    {
         
+        $validator = Validator::make($request->all(), [
+            'authen_id' => 'required',
+            'plan_id' => 'nullable',
+            'name' => 'required|string|unique:company,name',
+            'email' => 'required|email|unique:company,email',
+            'phone_number' => 'required|string',
+            'address' => 'nullable|string',
+            'contact_person' => 'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Bad Request: Datos errados',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ], 400);
+        }
+
+        $company = Company::create([
+            'authen_id' => $request->authen_id,
+            'plan_id' => $request->plan_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'contact_person' => $request->contact_person
+        ]);
+
+        if (!$company) {
+            return response()->json([
+                'message' => 'Internal Server Error: No se pudo crear una nueva compañía',
+                'status' => 500
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Company created successfully',
+            'company' => $company,
+            'status' => 201
+        ], 201);
+
+    }
+
+    public function create()
+    {
+        //
+    }
+
+
+    public function show(Company $company)
+    {
+        //
+    }
+
+    public function edit(Company $company)
+    {
+        //
+    }
+
+    public function update(Request $request, Company $company)
+    {
+        //
+    }
+
+    public function destroy(Company $company)
+    {
+        //
     }
 }

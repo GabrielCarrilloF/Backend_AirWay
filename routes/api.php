@@ -1,16 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AuthenticationController;
 
-Route::apiResource('companies', CompanyController::class);
 
-//Route::get('/companies', [CompanyController::class, 'index']);
-
-Route::post('/aut', [AuthenticationController::class, 'store']);
+Route::get('/companies', [CompanyController::class, 'index']);
 
 Route::post('/companies', [CompanyController::class, 'store']);
 
@@ -18,6 +14,5 @@ Route::put('/companies/{id}', function () {
     return 'actualizar';
 });
 
-Route::delete('/companies/{id}', function () {
-    return 'eliminar';
-});
+
+Route::post('/aut', [AuthenticationController::class, 'store']);
