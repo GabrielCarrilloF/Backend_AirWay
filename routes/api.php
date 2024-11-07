@@ -25,3 +25,4 @@ Route::post('/auth', [AuthenticationController::class, 'store']);
 
 
 Route::post('/auth/login', [AuthenticationController::class, 'authenticate']);
+Route::patch('/auth/{id}', [AuthenticationController::class, 'update']);

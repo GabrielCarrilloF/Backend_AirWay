@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\authentication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -121,5 +122,62 @@ class AuthenticationController extends Controller
             ];
             return response()->json($data, 200);
         }
+    }
+
+    public function update(Request $request, $id) 
+    {
+        $user = authentication::find($id);
+
+        if (!$user) { 
+            return response()->json(['error' => 'User not found'], 404); 
+        }
+        
+    $validator = Validator::make($request->all(), [ 
+
+        'user_name' => 'sometimes|string', 
+        'password' => [
+
+
+                                'sometimes',
+                                'string',
+                                'min:8',             
+                                'regex:/[a-z]/',      
+                                'regex:/[A-Z]/',      
+                                'regex:/[0-9]/',      
+                                'regex:/[@$!%*?&]/', 
+                            ], 
+        'last_access_date' => 'sometimes|date', 
+        'state' => 'sometimes|string', 
+    ]);
+
+    if ($validator->fails()) { 
+        return response()->json([
+            'error' => 'Validation failed', 
+            'message' => $validator->errors()], 400); 
+        }
+
+        if ($request->has('user_name')) { 
+            $user->user_name = $request->input('user_name'); 
+        }
+        if ($request->has('password')) { 
+            $user->password = Hash::make($request->input('password')); 
+        }
+        if ($request->has('last_access_date')) { 
+            $user->last_access_date = $request->input('last_access_date'); 
+        }
+        if ($request->has('state')) { 
+            $user->state = $request->input('state'); 
+        }
+
+        $data = [
+            'message' => 'usuario actualizado',
+            'company' => $user,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+
+
+
     }
 }
