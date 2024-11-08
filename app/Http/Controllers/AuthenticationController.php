@@ -25,6 +25,10 @@ class AuthenticationController extends Controller
             return response()->json($data, 200);
 
         }else{
+            $Authen = $Authen->map(function ($item) {
+                unset($item->password);
+                return $item;
+            });
             $data = [
                 'Authen' => $Authen,
                 'status' => 200
@@ -37,7 +41,7 @@ class AuthenticationController extends Controller
     public function store(Request $request)
     {
             $Validator = Validator::make($request->all(), [
-                'user_name' => 'required',
+                'user_name' => 'required|unique:Authentication',
                 'password' => [
                                 'required',
                                 'string',
@@ -75,13 +79,13 @@ class AuthenticationController extends Controller
                     ];
                     return response()->json($data, 500);
                 } else {
+                    $username = $user['user_name'];
+                    $data = authentication::where('user_name', $username)->first();
                     $data = [
                         'user' => $user,
                         'status' => 201
                     ];
-                    $username = $data['user']['user_name'];
-                    $user = authentication::where('user_name', $username)->first();
-                    return response()->json($user, 201);
+                    return response()->json($data, 201);
 
                 }
         }
@@ -134,7 +138,7 @@ class AuthenticationController extends Controller
         
     $validator = Validator::make($request->all(), [ 
 
-        'user_name' => 'sometimes|string', 
+        'user_name' => 'sometimes|string|unique:Authentication', 
         'password' => [
                         'sometimes',
                         'string',
@@ -174,8 +178,5 @@ class AuthenticationController extends Controller
         ];
 
         return response()->json($data, 200);
-
-
-
     }
 }
