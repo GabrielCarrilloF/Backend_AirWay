@@ -23,7 +23,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
          $validator = Validator::make($request->all(), [
-            'company_id' => 'required|exists:company,id', 
+            'company_id' => 'required|exists:company,name', 
             'plan_id' => 'required|exists:plan,id',        
             'payment_day' => 'required|date',
             'amount_paid' => 'required|numeric|min:0',      

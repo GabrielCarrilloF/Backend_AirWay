@@ -36,8 +36,8 @@ class CompanyController extends Controller
     {
         
         $validator = Validator::make($request->all(), [
-            'authen_id' => 'required|string|unique:company,authen_id',
-            'plan_id' => 'required|in:PVS-9101,MTH-5678,ANL-5235',
+            'authen_id' => 'required|string|unique:company,authen_id|exists:Authentication,id',
+            'plan_id' => 'required|exists:plan,id',
             'name' => 'required|string|unique:company,name',
             'email' => 'required|email|unique:company,email',
             'phone_number' => 'required|digits:10|unique:company,phone_number',
