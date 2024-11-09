@@ -13,21 +13,13 @@ Route::get('/companies/{id}', [CompanyController::class, 'show']);
 
 Route::post('/companies/create', [CompanyController::class, 'store']);
 
-<<<<<<< HEAD
-Route::get('/docs', function () {
-    return view('welcome');
-});
-
-Route::put('/companies/{id}', function () {
-    return 'actualizar';
-});
-=======
 Route::put('/companies/update/{id}', [CompanyController::class, 'update']);
->>>>>>> aaa5e3fe3009f250f1f58edb430d2dafe9c00f94
 
 Route::patch('/companies/updatePatch/{id}', [CompanyController::class, 'updatePatch']);
 
-
+Route::get('/docs', function () {
+    return view('welcome');
+});
 
 
 Route::get('/plan', [PlanController::class, 'index']);
