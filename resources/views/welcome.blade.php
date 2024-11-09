@@ -35,7 +35,7 @@
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a
-                                href=""
+                                
                                 id="docs-card"
                                 class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FFA500] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FFA500]"
                             >
@@ -57,18 +57,18 @@
                                     {<br>
                                         "id": 1,<br>
                                         "name": "Juan Pérez",<br>
-                                        "email": "juan.perez@example.com",<br>
-                                        "email_verified_at": "2024-10-20T14:30:00",<br>
-                                        "password": "$2y$10$Q..V1PJi9zkm9PkjAnO5euYlUjJ5bTPvJw8Ys8gwgxRtqO9ZYk9GG",<br>
-                                        "remember_token": "s3cr3tT0k3n",<br>
-                                        "created_at": "2024-10-01T12:00:00",<br>
-                                        "updated_at": "2024-10-15T09:00:00"<br>
+                                        "email": "juan.perez@unicolombo.edu.co",<br>
+                                        "email_verified_at": "2024-10-20",<br>
+                                        "password": "Developer_2004+",<br>
+                                        "remember_token": "Adm1nLoc2024+",<br>
+                                        "created_at": "2024-10-01",<br>
+                                        "updated_at": "2024-10-15"<br>
                                     }
 
                                     <br><br><br>
                                         
                                     {<br>
-                                        "id": "d587d7c6-b77a-44ab-9f7e-1a01554783c2",<br>
+                                        "id": "EFM-282",<br>
                                         "user_id": 1,<br>
                                         "ip_address": "192.168.1.1",<br>
                                         "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",<br>
@@ -78,13 +78,13 @@
 
                                     <br><br><br>
                                     {<br>
-                                        "id": "ab6d4c70-bab0-4f24-b415-e4d18a728ce9",<br>
-                                        "plan_name": "Basic Plan",<br>
+                                        "id": "ABC-123",<br>
+                                        "plan_name": "Anual Plan",<br>
                                         "percentage_fee": 5.00,<br>
                                         "description": "Plan básico con tarifa de servicio del 5%.",<br>
                                         "price": 99.99,<br>
-                                        "created_at": "2024-01-01T12:00:00",<br>
-                                        "updated_at": "2024-10-01T09:00:00"<br>
+                                        "created_at": "2024-01-01",<br>
+                                        "updated_at": "2024-10-0"<br>
                                     }
 
 
@@ -105,7 +105,7 @@
                             </a>
 
                             <a
-                                href=""
+                                
                                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                             >
                                 <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
@@ -132,7 +132,7 @@
                             </a>
 
                             <a
-                                href=""
+                                
                                 class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                                 >
                                 <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
@@ -260,116 +260,398 @@
                             </div>
 
 
-                       
+                                
 
+                            <div class="textdoc">
 
+                            <p class="doc font-semibold text-black dark:text-white">
 
-                                <center>
-
-                             <p class="doc font-semibold text-black dark:text-white">
-
-                             Introducción<br><br>
-                             Esta API proporciona una interfaz para gestionar recursos relacionados con el transporte aéreo, terrestre (buses y Uber) y hospedaje. <br>
-                             Permite la creación, obtención, actualización y eliminación de datos relacionados con vuelos, viajes en bus, reservaciones de Uber y hospedajes. <br>
-                             A continuación se describen los métodos disponibles y su uso dentro de esta API.<br>
                             
-                             Métodos HTTP Disponibles<br>
-                            La API está diseñada para utilizar los métodos HTTP estándar, cada uno con un propósito específico.<br>
-                            <br><br>
-                            1. GET - Recuperar Datos<br>
-                            El método GET se utiliza para recuperar información del servidor sin modificar los datos. Se emplea principalmente para la lectura de recursos.<br>
 
-                            Uso en la API:<br><br>
+                                Introducción<br><br>
+                                Esta API proporciona una interfaz para gestionar recursos relacionados con el transporte aéreo, terrestre (buses y Uber) y hospedaje. <br>
+                                Permite la creación, obtención, actualización y eliminación de datos relacionados con vuelos, viajes en bus, reservaciones de Uber y hospedajes. <br>
+                                A continuación se describen los métodos disponibles y su uso dentro de esta API.<br>
 
-                            Aerolíneas:<br>
-                            GET /flights – Obtiene la lista de todos los vuelos disponibles.<br>
-                            GET /flights/{id} – Obtiene los detalles de un vuelo específico usando su ID.<br>
-                            Buses:<br>
-                            GET /buses – Obtiene la lista de rutas de buses disponibles.<br>
-                            GET /buses/{id} – Obtiene los detalles de una ruta de bus específica.<br>
-                            Uber:<br>
-                            GET /uber/ride/{id} – Obtiene los detalles de un viaje de Uber por su ID.<br>
-                            Hospedaje:<br>
-                            GET /hotels – Obtiene la lista de hoteles disponibles.<br>
-                            GET /hotels/{id} – Obtiene los detalles de un hotel específico.<br>
-                            2. POST - Crear Nuevos Recursos<br>
-                            El método POST se utiliza para enviar datos al servidor con el fin de crear un nuevo recurso.<br><br>
+                                Métodos HTTP Disponibles<br>
+                                La API está diseñada para utilizar los métodos HTTP estándar, cada uno con un propósito específico.<br>
+                                <br><br>
+                                1. Obtener todas las empresas
+                                URL: /companies
+                                Método: GET
+                                Descripción: Recupera una lista de todas las empresas registradas.
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br>
+                                2. Obtener una empresa específica
+                                URL: /companies/{id}
+                                Método: GET
+                                Descripción: Recupera los detalles de una empresa específica mediante su ID.
+                                Parámetros de URL:
+                                id: El ID de la empresa que deseas obtener.
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br>
+                                3. Crear una nueva empresa
+                                URL: /companies/create<br><br>
+                                Método: POST
+                                Descripción: Crea una nueva empresa en el sistema.
+                                Cuerpo de la solicitud: Debes enviar los detalles de la nueva empresa (como nombre y dirección).
+                                Respuesta:
+                                201 Created si la empresa fue creada con éxito.<br>
+                                4. Actualizar una empresa (actualización completa)
+                                URL: /companies/update/{id}<br><br>
+                                Método: PUT
+                                Descripción: Actualiza completamente los datos de una empresa existente mediante su ID.
+                                Parámetros de URL:
+                                id: El ID de la empresa que deseas actualizar.
+                                Cuerpo de la solicitud: Debes enviar los datos completos de la empresa (por ejemplo, nombre y dirección).
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br>
+                                5. Actualizar parcialmente una empresa
+                                URL: /companies/updatePatch/{id}<br><br>
+                                Método: PATCH
+                                Descripción: Actualiza parcialmente los datos de una empresa existente.
+                                Parámetros de URL:
+                                id: El ID de la empresa que deseas actualizar.
+                                Cuerpo de la solicitud: Debes enviar solo los campos que deseas actualizar (por ejemplo, solo el nombre o solo la dirección).
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br><br>
+                                Planes de Suscripción<br>
+                                1. Obtener todos los planes
+                                URL: /plan
+                                Método: GET
+                                Descripción: Recupera una lista de todos los planes de suscripción disponibles.
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br>
+                                2. Obtener un plan específico
+                                URL: /plan/{id}
+                                Método: GET
+                                Descripción: Recupera los detalles de un plan específico mediante su ID.
+                                Parámetros de URL:
+                                id: El ID del plan que deseas obtener.
+                                Respuesta:
+                                200 OK si la operación es exitosa.
+                                Autenticación de Usuarios<br>
+                                1. Crear una cuenta de usuario
+                                URL: /auth/create
+                                Método: POST
+                                Descripción: Crea una nueva cuenta de usuario.
+                                Cuerpo de la solicitud: Debes enviar los detalles del usuario, como el correo electrónico y la contraseña.
+                                Respuesta:
+                                201 Created si el usuario fue creado con éxito.<br>
+                                2. Iniciar sesión
+                                URL: /auth/login
+                                Método: POST
+                                Descripción: Permite a un usuario iniciar sesión con su correo electrónico y contraseña.
+                                Cuerpo de la solicitud: Debes enviar el correo electrónico y la contraseña.
+                                Respuesta:
+                                200 OK si la autenticación es exitosa, junto con el token de acceso (si aplica).<br>
+                                3. Actualizar la información del usuario<br>
+                                URL: /auth/update/{id}
+                                Método: PATCH
+                                Descripción: Actualiza la información de un usuario existente.
+                                Parámetros de URL:
+                                id: El ID del usuario que deseas actualizar.
+                                Cuerpo de la solicitud: Debes enviar los campos que deseas actualizar, como el nombre o la dirección de correo electrónico.
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br><br>
+                                Gestión de Pagos<br>
+                                1. Crear un pago
+                                URL: /payments/create
+                                Método: POST
+                                Descripción: Registra un nuevo pago.
+                                Cuerpo de la solicitud: Debes enviar los detalles del pago, como el monto y el método de pago.
+                                Respuesta:
+                                201 Created si el pago fue procesado correctamente.
+                                2. Obtener los detalles de un pago<br>
+                                URL: /payments/{id}
+                                Método: GET
+                                Descripción: Recupera los detalles de un pago específico mediante su ID.
+                                Parámetros de URL:
+                                id: El ID del pago que deseas consultar.
+                                Respuesta:
+                                200 OK si la operación es exitosa.<br><br>
+                                Documentación de la API<br>
+                                URL: /docs
+                                Método: GET
+                                Descripción: Muestra la página de bienvenida o la documentación de la API.
+                                Respuesta:
+                                200 OK con la página de documentación.</p>
+                                
+                            </div>
+                        
+                   <div><table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>BIGINT (AUTO_INCREMENT)</td>
+            <td>Primary Key</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR</td>
+            <td>UNIQUE, NOT NULL</td>
+        </tr>
+        <tr>
+            <td>email_verified_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>remember_token</td>
+            <td>VARCHAR</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+    </tbody>
+</table><br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR</td>
+            <td>Primary Key</td>
+        </tr>
+        <tr>
+            <td>token</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+    </tbody>
+</table><br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>VARCHAR</td>
+            <td>Primary Key</td>
+        </tr>
+        <tr>
+            <td>user_id</td>
+            <td>BIGINT</td>
+            <td>Foreign Key (nullable)</td>
+        </tr>
+        <tr>
+            <td>ip_address</td>
+            <td>VARCHAR(45)</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>user_agent</td>
+            <td>TEXT</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>payload</td>
+            <td>LONGTEXT</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>last_activity</td>
+            <td>INTEGER</td>
+            <td>INDEX</td>
+        </tr>
+    </tbody>
+</table><br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>UUID</td>
+            <td>Primary Key</td>
+        </tr>
+        <tr>
+            <td>plan_name</td>
+            <td>VARCHAR</td>
+            <td>UNIQUE, NOT NULL</td>
+        </tr>
+        <tr>
+            <td>percentage_fee</td>
+            <td>DECIMAL (5,2)</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>TEXT</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td>DECIMAL (10,2)</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>TIMESTAMP</td>
+            <td>NULLABLE</td>
+        </tr>
+    </tbody>
+</table><br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>UUID</td>
+            <td>Primary Key</td>
+        </tr>
+        <tr>
+            <td>company_id</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>service_type</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>VARCHAR</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>TEXT</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL</td>
+        </tr>
+    </tbody>
+</table><br>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo de dato</th>
+            <th>Restricciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>VARCHAR</td>
+            <td>Primary Key, NOT NULL</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR</td>
+            <td>UNIQUE, NULLABLE</td>
+        </tr>
+        <tr>
+            <td>phone_number</td>
+            <td>VARCHAR</td>
+            <td>UNIQUE, NOT NULL</td>
+        </tr>
+        <tr>
+            <td>address</td>
+            <td>TEXT</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>contact_person</td>
+            <td>VARCHAR</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>authen_id</td>
+            <td>UUID</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>plan_id</td>
+            <td>UUID</td>
+            <td>NULLABLE</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL</td>
+        </tr>
+    </tbody>
+</table>
 
-                            Uso en la API:<br><br>
-
-                            Aerolíneas:<br>
-                            POST /flights – Crea un nuevo vuelo.<br>
-                            Buses:<br>
-                            POST /buses – Crea una nueva ruta de bus.<br>
-                            Uber:<br>
-                            POST /uber/rides – Crea un nuevo viaje en Uber.<br>
-                            Hospedaje:<br>
-                            POST /hotels – Crea una nueva oferta de hotel.<br>
-                            3. PATCH - Actualización Parcial de un Recurso<br>
-                            El método PATCH se utiliza para modificar parcialmente un recurso existente. Solo los campos proporcionados en la solicitud serán actualizados, sin afectar los demás campos del recurso.<br><br>
-
-                            Uso en la API:
-
-                            Aerolíneas:
-                            PATCH /flights/{id} – Modifica los detalles de un vuelo, como su horario o destino.
-                            Buses:
-                            PATCH /buses/{id} – Modifica los detalles de una ruta de bus (por ejemplo, cambiar el horario de salida).
-                            Uber:
-                            PATCH /uber/rides/{id} – Actualiza detalles de un viaje de Uber, como su estado.
-                            Hospedaje:
-                            PATCH /hotels/{id} – Modifica la disponibilidad o las tarifas de un hotel.
-                            4. PUT - Actualización Completa de un Recurso
-                            El método PUT se utiliza para reemplazar completamente un recurso existente con nuevos datos. El recurso debe ser enviado en su totalidad, no solo los campos modificados.
-
-                            Uso en la API:
-
-                            Aerolíneas:
-                            PUT /flights/{id} – Reemplaza todos los detalles de un vuelo.
-                            Buses:
-                            PUT /buses/{id} – Reemplaza toda la información de una ruta de bus.
-                            Uber:
-                            PUT /uber/rides/{id} – Reemplaza los detalles de un viaje de Uber.
-                            Hospedaje:
-                            PUT /hotels/{id} – Reemplaza la información de un hotel, como su ubicación, tarifas, etc.
-                            5. DELETE - Eliminar un Recurso
-                            El método DELETE se utiliza para eliminar un recurso existente del servidor.
-
-                            Uso en la API:
-
-                            Aerolíneas:
-                            DELETE /flights/{id} – Elimina un vuelo específico.
-                            Buses:
-                            DELETE /buses/{id} – Elimina una ruta de bus.
-                            Uber:
-                            DELETE /uber/rides/{id} – Cancela un viaje de Uber.
-                            Hospedaje:
-                            DELETE /hotels/{id} – Elimina un hotel o una oferta de hospedaje.
-
-                            Conclusión
-                            Esta API proporciona acceso a todos los aspectos clave de la gestión de vuelos, rutas de buses, viajes de Uber y hospedaje. Asegúrate de seguir los métodos HTTP adecuados según la operación que desees realizar, y utiliza las respuestas proporcionadas para gestionar los recursos correctamente.
-                             </p>
-
-                             <table>Campo	Tipo de Datos	Descripción
-id	BIGINT	Identificador único del trabajo fallido (clave primaria).
-uuid	STRING	Identificador único global (UUID) para el trabajo.
-connection	TEXT	Conexión utilizada para ejecutar el trabajo.
-queue	TEXT	Cola en la que el trabajo fue colocado.
-payload	LONGTEXT	Información del trabajo que falló.
-exception	LONGTEXT	Detalles sobre el error que causó el fallo del trabajo.
-failed_at	TIMESTAMP	Marca de tiempo cuando el trabajo falló.</table>
-
-                                </center>
-
-
-
-
-                        </div>
-                    </main>
+</div>
 
                     
                     
-                </div>
-            </div>
-        </div>
+                
+            
+        
     </body>
 </html>
