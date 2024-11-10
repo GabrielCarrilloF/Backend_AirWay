@@ -17,7 +17,9 @@ Route::put('/companies/update/{id}', [CompanyController::class, 'update']);
 
 Route::patch('/companies/updatePatch/{id}', [CompanyController::class, 'updatePatch']);
 
-
+Route::get('/docs', function () {
+    return view('welcome');
+});
 
 
 Route::get('/plan', [PlanController::class, 'index']);
