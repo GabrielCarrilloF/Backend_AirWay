@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\PaymentsValidationHelpers;
 use App\Models\Payment;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -22,13 +23,22 @@ class PaymentController extends Controller
     
     public function store(Request $request)
     {
-         $validator = Validator::make($request->all(), [
-            'company_id' => 'required|exists:company,name', 
-            'plan_id' => 'required|exists:plan,id',        
-            'payment_day' => 'required|date',
-            'amount_paid' => 'required|numeric|min:0',      
-            'payment_type' => 'required|string|max:50',     
-        ]);
+        $data = $request->all();
+
+        
+        $validator = Validator::make($data, [
+            'company_id' => PaymentsValidationHelpers::validateCompanyId()['rules'],
+            'plan_id' => PaymentsValidationHelpers::validatePlanId()['rules'],
+            'payment_day' => PaymentsValidationHelpers::validatePaymentDay()['rules'],
+            'amount_paid' => PaymentsValidationHelpers::validateAmountPaid($data)['rules'],
+            'payment_type' => PaymentsValidationHelpers::validatePaymentType()['rules'],
+        ], array_merge(
+            PaymentsValidationHelpers::validateCompanyId()['messages'],
+            PaymentsValidationHelpers::validatePlanId()['messages'],
+            PaymentsValidationHelpers::validatePaymentDay()['messages'],
+            PaymentsValidationHelpers::validateAmountPaid($data)['messages'],
+            PaymentsValidationHelpers::validatePaymentType()['messages']
+        ));
 
         if ($validator->fails()) {
             return response()->json([
