@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CompanyValidationHelpers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -36,15 +37,24 @@ class CompanyController extends Controller
     {
         
         $validator = Validator::make($request->all(), [
-            'authen_id' => 'required|string|unique:company,authen_id',
-            'plan_id' => 'required|in:PVS-9101,MTH-5678,ANL-5235',
-            'name' => 'required|string|unique:company,name',
-            'type_company' => 'required|string|in:aerolinea,transporte terrestre,hotel',
-            'email' => 'required|email|unique:company,email',
-            'phone_number' => 'required|digits:10|unique:company,phone_number',
-            'address' => 'nullable|string',
-            'contact_person' => 'nullable|string'
-        ]);
+            'authen_id' => CompanyValidationHelpers::validateAuthenId()['rules'],
+            'plan_id' => CompanyValidationHelpers::validatePlanId()['rules'],
+            'name' => CompanyValidationHelpers::validateName()['rules'],
+            'type_company' => CompanyValidationHelpers::validateTypeCompany()['rules'],
+            'email' => CompanyValidationHelpers::validateEmail()['rules'],
+            'phone_number' => CompanyValidationHelpers::validatePhoneNumber()['rules'],
+            'address' => CompanyValidationHelpers::validateAddress()['rules'],
+            'contact_person' => CompanyValidationHelpers::validateContactPerson()['rules'],
+        ], array_merge(
+            CompanyValidationHelpers::validateAuthenId()['messages'],
+            CompanyValidationHelpers::validatePlanId()['messages'],
+            CompanyValidationHelpers::validateName()['messages'],
+            CompanyValidationHelpers::validateTypeCompany()['messages'],
+            CompanyValidationHelpers::validateEmail()['messages'],
+            CompanyValidationHelpers::validatePhoneNumber()['messages'],
+            CompanyValidationHelpers::validateAddress()['messages'],
+            CompanyValidationHelpers::validateContactPerson()['messages']
+        ));
 
         if ($validator->fails()) {
             return response()->json([
@@ -99,54 +109,6 @@ class CompanyController extends Controller
         return response()->json($data, 200);
     }
 
-    public function update(Request $request, $id)
-    {
-        $company = Company::find($id);
-
-        if (!$company) {
-            return response()->json([
-                'message' => 'Compañia no encontrada.',
-                'status' => 404
-            ], 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            //'authen_id' => 'required|string|unique:company,authen_id',
-            'plan_id' => 'required|in:PVS-9101,MTH-5678,ANL-5235',
-            'name' => 'required|string',
-            'email' => 'required|email|unique:company,email',
-            'phone_number' => 'required|digits:10|unique:company,phone_number',
-            'address' => 'nullable|string',
-            'contact_person' => 'nullable|string'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Bad Request: Datos errados',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ], 400);
-        }
-
-        $company->plan_id = $request->plan_id;
-        $company->name = $request->name;
-        $company->email = $request->email;
-        $company->phone_number = $request->phone_number;
-        $company->address = $request->address;
-        $company->contact_person = $request->contact_person;
-
-        $company->save();
-        
-        $data = [
-            'message' => 'Comapañia actualizada',
-            'company' => $company,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
-
-    }
-
     public function updatePatch(Request $request, $id)
     {
         $company = Company::find($id);
@@ -158,37 +120,73 @@ class CompanyController extends Controller
             ], 404);
         }
 
-        $validator = Validator::make($request->all(), [
-            //'authen_id' => 'required|string|unique:company,authen_id',
-            'plan_id' => 'in:PVS-9101,MTH-5678,ANL-5235',
-            'name' => 'string',
-            'email' => 'email|unique:company,email',
-            'phone_number' => 'digits:10|unique:company,phone_number',
-            'address' => 'nullable|string',
-            'contact_person' => 'nullable|string'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Bad Request: Datos errados',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ], 400);
-        }
-
         if($request->has('name')){
+            $validator = Validator::make($request->all(), [
+                'name' => CompanyValidationHelpers::validateName()['rules']
+            ], array_merge(
+                CompanyValidationHelpers::validateName()['messages']
+            ));
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
             $company->name = $request->name;
         }
 
         if($request->has('plan_id')){
+            $validator = Validator::make($request->all(), [
+                'plan_id' => CompanyValidationHelpers::validatePlanId()['rules']
+            ], array_merge(
+                CompanyValidationHelpers::validatePlanId()['messages'],
+            ));
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
             $company->plan_id = $request->plan_id;
         }
 
         if($request->has('email')){
+
+            $validator = Validator::make($request->all(), [
+                'email' => CompanyValidationHelpers::validateEmail()['rules']
+            ], array_merge(
+                CompanyValidationHelpers::validateEmail()['messages']
+            ));
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+
             $company->email = $request->email;
         }
 
         if($request->has('phone_number')){
+            $validator = Validator::make($request->all(), [
+                'phone_number' => CompanyValidationHelpers::validatePhoneNumber()['rules']
+            ], array_merge(
+                CompanyValidationHelpers::validatePhoneNumber()['messages']
+            ));
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
             $company->phone_number = $request->phone_number;
         }
 
@@ -209,6 +207,5 @@ class CompanyController extends Controller
         ];
 
         return response()->json($data, 200);
-
     }
 }
