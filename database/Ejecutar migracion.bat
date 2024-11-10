@@ -21,6 +21,9 @@ php artisan migrate --path=/database/migrations/2024_11_04_204450_create_plan_ta
 php artisan migrate --path=/database/migrations/2024_11_04_141107_create_company_table.php
 php artisan migrate --path=/database/migrations/2024_11_04_204649_create_service_table.php
 php artisan migrate --path=/database/migrations/2024_11_04_205638_create_payment_table.php
+php artisan migrate --path=/database/migrations/2024_11_09_215947_create_vehicle_table.php
+php artisan migrate --path=/database/migrations/2024_11_09_221025_create_transportation_offers_table.php
+php artisan migrate --path=/database/migrations/2024_11_09_222001_create_rooms_table.php
 echo =========================================================
 php artisan migrate
 
