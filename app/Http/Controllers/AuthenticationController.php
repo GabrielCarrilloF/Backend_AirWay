@@ -26,6 +26,10 @@ class AuthenticationController extends Controller
             return response()->json($data, 200);
 
         }else{
+            $Authen = $Authen->map(function ($item) {
+                unset($item->password);
+                return $item;
+            });
             $data = [
                 'Authen' => $Authen,
                 'status' => 200
@@ -85,13 +89,13 @@ class AuthenticationController extends Controller
                     ];
                     return response()->json($data, 500);
                 } else {
+                    $username = $user['user_name'];
+                    $data = authentication::where('user_name', $username)->first();
                     $data = [
                         'user' => $user,
                         'status' => 201
                     ];
-                    $username = $data['user']['user_name'];
-                    $user = authentication::where('user_name', $username)->first();
-                    return response()->json($user, 201);
+                    return response()->json($data, 201);
 
                 }
         }
