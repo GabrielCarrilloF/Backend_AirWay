@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\AuthenticationValidationHelpers;
 
 class AuthenticationController extends Controller
 {
@@ -36,28 +37,37 @@ class AuthenticationController extends Controller
 
     public function store(Request $request)
     {
-            $Validator = Validator::make($request->all(), [
-                'user_name' => 'required',
-                'password' => [
-                                'required',
-                                'string',
-                                'min:8',              // Mínimo 8 caracteres
-                                'regex:/[a-z]/',      // Al menos una letra minúscula
-                                'regex:/[A-Z]/',      // Al menos una letra mayúscula
-                                'regex:/[0-9]/',      // Al menos un número
-                                'regex:/[@$!%*?&]/',  // Al menos un carácter especial
-                            ],
-                'suppliers' => 'required',
-                'last_access_date' => 'required',
-                'state' => 'required'
-            ]);
+        $passwordValidation = AuthenticationValidationHelpers::validatePassword();
+        $userNameValidation = AuthenticationValidationHelpers::validateUserName();
+        $suppliersValidation = AuthenticationValidationHelpers::validateSuppliers();
+        $lastAccessDateValidation = AuthenticationValidationHelpers::validateLastAccessDate();
+        $stateValidation = AuthenticationValidationHelpers::validateState();
+        
+        $rules = [
+            'user_name' => $userNameValidation['rules'],
+            'password' => $passwordValidation['rules'],
+            'suppliers' => $suppliersValidation['rules'],
+            'last_access_date' => $lastAccessDateValidation['rules'],
+            'state' => $stateValidation['rules']
+        ];
+
+        $messages = array_merge(
+            $userNameValidation['messages'],
+            $passwordValidation['messages'],
+            $suppliersValidation['messages'],
+            $lastAccessDateValidation['messages'],
+            $stateValidation['messages']
+        );
+
+        $Validator = Validator::make($request->all(), $rules, $messages);
 
             if ($Validator->fails()) {
-                $data = [
+               $data = [
                     'message' => 'Bad Request: Datos errados',
                     'error' => $Validator->errors(),
                     'status' => 400
                 ];
+
                 return response()->json($data, 400);
             } else {
                 $user = authentication::create([
@@ -132,50 +142,103 @@ class AuthenticationController extends Controller
             return response()->json(['error' => 'User not found'], 404); 
         }
         
-    $validator = Validator::make($request->all(), [ 
+        $passwordValidation = AuthenticationValidationHelpers::validatePassword();
+        $userNameValidation = AuthenticationValidationHelpers::validateUserName();
+        $suppliersValidation = AuthenticationValidationHelpers::validateSuppliers();
+        $lastAccessDateValidation = AuthenticationValidationHelpers::validateLastAccessDate();
+        $stateValidation = AuthenticationValidationHelpers::validateState();
+        
+        
 
-        'user_name' => 'sometimes|string', 
-        'password' => [
-                        'sometimes',
-                        'string',
-                        'min:8',             
-                        'regex:/[a-z]/',      
-                        'regex:/[A-Z]/',      
-                        'regex:/[0-9]/',      
-                        'regex:/[@$!%*?&]/', 
-                    ], 
-        'last_access_date' => 'sometimes|date', 
-        'state' => 'sometimes|string', 
-    ]);
+            if ($request->has('user_name')) {
+                
+                $rules = [
+                    'user_name' => $userNameValidation['rules'],
+                ];
+        
+                $messages = array_merge(
+                    $userNameValidation['messages'],
+                );
+        
+                $validator = Validator::make($request->all(), $rules, $messages);
+        
+                if ($validator->fails()) { 
+                    return response()->json([
+                        'error' => 'Validation failed', 
+                        'message' => $validator->errors()], 400); 
+                } 
 
-    if ($validator->fails()) { 
-        return response()->json([
-            'error' => 'Validation failed', 
-            'message' => $validator->errors()], 400); 
-        }
+                $user->user_name = $request->input('user_name'); 
 
-        if ($request->has('user_name')) { 
-            $user->user_name = $request->input('user_name'); 
-        }
-        if ($request->has('password')) { 
-            $user->password = Hash::make($request->input('password')); 
-        }
-        if ($request->has('last_access_date')) { 
-            $user->last_access_date = $request->input('last_access_date'); 
-        }
-        if ($request->has('state')) { 
-            $user->state = $request->input('state'); 
-        }
+            }
 
-        $data = [
-            'message' => 'usuario actualizado',
-            'company' => $user,
-            'status' => 200
-        ];
+            if ($request->has('password')) { 
 
-        return response()->json($data, 200);
+                $rules = [
+                    'password' => $passwordValidation['rules'],
+                ];
+        
+                $messages = array_merge(
+                    $passwordValidation['messages'],
+                );
+        
+                $validator = Validator::make($request->all(), $rules, $messages);
+        
+                if ($validator->fails()) { 
+                    return response()->json([
+                        'error' => 'Validation failed', 
+                        'message' => $validator->errors()], 400); 
+                }
 
+                $user->password = Hash::make($request->input('password')); 
+            }
+            if ($request->has('last_access_date')) { 
 
+                $rules = [
+                    'last_access_date' => $lastAccessDateValidation['rules'],
+                ];
+        
+                $messages = array_merge(
+                    $lastAccessDateValidation['messages'],
+                );
+        
+                $validator = Validator::make($request->all(), $rules, $messages);
+        
+                if ($validator->fails()) { 
+                    return response()->json([
+                        'error' => 'Validation failed', 
+                        'message' => $validator->errors()], 400); 
+                }
 
+                $user->last_access_date = $request->input('last_access_date'); 
+            }
+            if ($request->has('state')) {
+                
+                $rules = [
+                    'state' => $stateValidation['rules']
+                ];
+        
+                $messages = array_merge(
+                    $stateValidation['messages']
+                );
+        
+                $validator = Validator::make($request->all(), $rules, $messages);
+        
+                if ($validator->fails()) { 
+                    return response()->json([
+                        'error' => 'Validation failed', 
+                        'message' => $validator->errors()], 400); 
+                }
+                
+                $user->state = $request->input('state'); 
+            }
+
+            $data = [
+                'message' => 'usuario actualizado',
+                'company' => $user,
+                'status' => 200
+            ];
+
+            return response()->json($data, 200);
     }
 }
