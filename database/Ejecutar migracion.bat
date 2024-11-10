@@ -1,6 +1,14 @@
 @echo off
 cd C:\xampp\htdocs\Backend_AirWay
 
+echo                ___   ___ 
+echo      // | |       / /        //   ) ) ||   / |  / /     // | | \\    / /
+echo     //__| |      / /        //___/ /  ||  /  | / /     //__| |  \\  / / 
+echo    / ___  |     / /        / ___ (    || / /||/ /     / ___  |   \\/ / 
+echo   //    | |    / /        //   | |    ||/ / |  /     //    | |    / / 
+echo  //     | | __/ /___     //    | |    |  /  | /     //     | |   / / 
+echo          Jesus Valiente - Luis Olmos - Gabriel Carrillo 
+
 :: Pregunta si desea resetear las migraciones
 set /p reset_migracion=¿Desea resetear las migraciones? (s/n): 
 
@@ -26,17 +34,5 @@ php artisan migrate
 
 echo.
 echo =========================================================
-echo            .-''''''-.
-echo           /          \
-echo          |            |
-echo          |,  .-.  .-. ,|
-echo          | )(_o/  \o_)(|
-echo          |/     /\     \|
-echo          (_     ^^     _)
-echo           \__|IIIIII|__/
-echo            | \IIIIII/ |
-echo            \          /
-echo             `--------`
-echo.
 echo      ¡Migraciones completadas en el orden adecuado!
 echo =========================================================
