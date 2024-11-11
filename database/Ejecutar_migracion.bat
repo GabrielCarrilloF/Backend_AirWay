@@ -1,17 +1,24 @@
 @echo off
 
-echo                ___   ___ 
-echo      // | |       / /        //   ) ) ||   / |  / /     // | | \\    / /
-echo     //__| |      / /        //___/ /  ||  /  | / /     //__| |  \\  / /
-echo    / ___  |     / /        / ___ (    || / /||/ /     / ___  |   \\/ /
-echo   //    | |    / /        //   | |    ||/ / |  /     //    | |    / /
-echo  //     | | __/ /___     //    | |    |  /  | /     //     | |   / /
-echo      ©   Jesus Valiente - Luis Olmos - Gabriel Carrillo   ©
+
+echo "               ___   ___ "
+echo "     // | |       / /        //   ) ) ||   / |  / /     // | | \\    / / "
+echo "    //__| |      / /        //___/ /  ||  /  | / /     //__| |  \\  / / "
+echo "   / ___  |     / /        / ___ (    || / /||/ /     / ___  |   \\/ / "
+echo "  //    | |    / /        //   | |    ||/ / |  /     //    | |    / / "
+echo " //     | | __/ /___     //    | |    |  /  | /     //     | |   / / "
+
+echo         Jesus Valiente - Luis Olmos - Gabriel Carrillo   
 
 :: Pregunta si desea resetear las migraciones
 set /p reset_migracion=¿Desea resetear las migraciones? (s/n): 
 
-cd C:\xampp\htdocs\Backend_AirWay
+if exist "C:\xampp\htdocs\Backend_AirWay" (
+    cd C:\xampp\htdocs\Backend_AirWay
+) else (
+    echo Error: El directorio "C:\xampp\htdocs\Backend_AirWay" no existe.
+    exit /b
+)
 
 if /i "%reset_migracion%"=="s" (
     echo Reseteando migraciones...
@@ -35,8 +42,16 @@ php artisan migrate
 
 echo.
 echo =========================================================
-echo      ¡Migraciones completadas en el orden adecuado!
+echo      Migraciones completadas en el orden adecuado
 echo =========================================================
+
+echo "  _          _                   _             __                 ____       _          _      _  "
+echo " | |   _   _(_)___              | | ___  ___ _/_/_ ___           / ___| __ _| |__  _ __(_) ___| | "
+echo " | |  | | | | / __|  _____   _  | |/ _ \/ __| | | / __|  _____  | |  _ / _` | '_ \| '__| |/ _ \ | "
+echo " | |__| |_| | \__ \ |_____| | |_| |  __/\__ \ |_| \__ \ |_____| | |_| | (_| | |_) | |  | |  __/ | "
+echo " |_____\__,_|_|___/          \___/ \___||___/\__,_|___/          \____|\__,_|_.__/|_|  |_|\___|_| "
+                                                                                                 
+echo .
 
 :: Cuenta regresiva de 10 segundos
 echo Iniciando cuenta regresiva de 10 segundos para salir...
@@ -46,4 +61,3 @@ for /L %%i in (10,-1,1) do (
 )
 
 echo Fin de la cuenta regresiva. El script se cerrará ahora.
-exit
