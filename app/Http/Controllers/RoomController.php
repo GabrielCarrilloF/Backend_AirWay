@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\RoomValidationHelpers;
+use App\Models\Company;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -74,9 +75,19 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $company = Company::find($id);
+        if (!$company) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+
+        $room = Room::where('company_id', $id)->get();
+
+        return response()->json([
+            'company' => $company->name,
+            'room' => $room
+        ], 200);
     }
     
     /**
