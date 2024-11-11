@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoomController;
 
 Route::get('/companies', [CompanyController::class, 'index']);
 
@@ -38,7 +39,12 @@ Route::post('/auth/login', [AuthenticationController::class, 'authenticate']);
 Route::patch('/auth/update/{id}', [AuthenticationController::class, 'update']);
 
 
-
-
 Route::post('/payments/create', [PaymentController::class, 'store']);
 Route::get('/payments/{id}', [PaymentController::class, 'show']);
+
+
+Route::post('/room/create', [RoomController::class, 'store']);
+Route::get('/room', [RoomController::class, 'index']);
+Route::get('/room/{id}', [RoomController::class, 'show']);
+Route::patch('/room/update', [RoomController::class, 'update']);
+Route::delete('/room/delete/{id}', [RoomController::class, 'destroy']);
