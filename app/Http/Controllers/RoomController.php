@@ -269,10 +269,7 @@ class RoomController extends Controller
             }
             $room->description = $request->description;
         }
-        
-
-        
-
+    
         $room->save();
         
         $data = [
