@@ -46,5 +46,5 @@ Route::get('/payments/{id}', [PaymentController::class, 'show']);
 Route::post('/room/create', [RoomController::class, 'store']);
 Route::get('/room/all/{id}', [RoomController::class, 'index']);
 Route::get('/room/{id}', [RoomController::class, 'show']);
-Route::patch('/room/update', [RoomController::class, 'update']);
+Route::patch('/room/update/{id}', [RoomController::class, 'update']);
 Route::delete('/room/delete/{id}', [RoomController::class, 'destroy']);

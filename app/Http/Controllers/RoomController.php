@@ -116,9 +116,172 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, $id)
     {
-        //
+        $room = Room::find($id);
+
+        if (!$room) {
+            return response()->json([
+                'message' => 'habitación no encontrada.',
+                'status' => 404
+            ], 404);
+        }
+
+        if ($request->has('room_number')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'room_number' => RoomValidationHelpers::validateRoomNumber($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateRoomNumber($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->room_number = $request->room_number;
+        }
+        
+        
+        if ($request->has('room_type')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'room_type' => RoomValidationHelpers::validateRoomType($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateRoomType($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->room_type = $request->room_type;
+        }
+        
+        if ($request->has('room_size')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'room_size' => RoomValidationHelpers::validateRoomSize($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateRoomSize($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->room_size = $request->room_size;
+        }
+        
+        if ($request->has('room_capacity')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'room_capacity' => RoomValidationHelpers::validateRoomCapacity($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateRoomCapacity($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->room_capacity = $request->room_capacity;
+        }
+        
+        if ($request->has('amenities')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'amenities' => RoomValidationHelpers::validateAmenities($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateAmenities($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->amenities = $request->amenities;
+        }
+        
+        if ($request->has('photos')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'photos' => RoomValidationHelpers::validatePhotos($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validatePhotos($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->photos = $request->photos;
+        }
+        
+        if ($request->has('room_status')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'room_status' => RoomValidationHelpers::validateRoomStatus($data)['rules']
+            ], array_merge(
+                RoomValidationHelpers::validateRoomStatus($data)['messages']
+            ));
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->room_status = $request->room_status;
+        }
+        
+        if ($request->has('description')) {
+            $data = $request->all();
+            $validator = Validator::make($request->all(), [
+                'description' => 'required|string|max:255', 
+            ]);
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Bad Request: Datos errados',
+                    'errors' => $validator->errors(),
+                    'status' => 400
+                ], 400);
+            }
+            $room->description = $request->description;
+        }
+        
+
+        
+
+        $room->save();
+        
+        $data = [
+            'message' => 'Habitacion actualizada',
+            'room' => $room,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
