@@ -284,8 +284,32 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+
+        if (!$room) {
+            return response()->json([
+                'message' => 'habitación no encontrada.',
+                'status' => 404
+            ], 404);
+        }
+
+        $room->delete();
+
+        $room = Room::find($id);
+        if (!$room) {
+            return response()->json([
+                'message' => 'Habitación eliminada exitosamente.',
+                'status' => 200
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'Error al eliminar la habitación.',
+                'status' => 500
+            ], 500);
+        }
+
     }
+
 }
