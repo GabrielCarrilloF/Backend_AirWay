@@ -53,7 +53,8 @@ class RoomController extends Controller
             'room_capacity' => $request->room_capacity,
             'amenities' => $request->amenities,
             'photos' => $request->photos,
-            'room_status'=> $request->room_status
+            'room_status'=> $request->room_status,
+            'description'=> $request->description
         ]);
 
         if (!$request) {
@@ -93,10 +94,23 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show($id)
     {
-        
+        $room = Room::find($id);
 
+        if (!$room) {
+            return response()->json([
+                'message' => 'habitación no encontrada.',
+                'status' => 404
+            ], 404);
+        }
+
+        $data = [
+            'room' => $room,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
