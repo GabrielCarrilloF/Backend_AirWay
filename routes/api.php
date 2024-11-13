@@ -48,3 +48,6 @@ Route::get('/room/all/{id}', [RoomController::class, 'index']);
 Route::get('/room/{id}', [RoomController::class, 'show']);
 Route::patch('/room/update/{id}', [RoomController::class, 'update']);
 Route::delete('/room/delete/{id}', [RoomController::class, 'destroy']);
+
+
+// El laborar las rutas para usar los meotod de las ofertas de hotel 
