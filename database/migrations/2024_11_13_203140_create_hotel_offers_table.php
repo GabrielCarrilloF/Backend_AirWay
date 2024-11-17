@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('available_until');           
             $table->timestamps();
             
-            $table->foreign('company_id')->references('name')->on('companies')->onDelete('cascade');
+            $table->foreign('company_id')->references('name')->on('company')->onDelete('cascade');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
         });
     }
