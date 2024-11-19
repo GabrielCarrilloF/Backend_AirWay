@@ -26,19 +26,18 @@ class HotelOffersController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'hotel_name' => HotelOffersValidationHelpers::validateHotelName()['rules'],
+            'company_id' => HotelOffersValidationHelpers::validateCompanyId()['rules'],
+            'room_id' => HotelOffersValidationHelpers::validateRoomId($data)['rules'],
             'price_per_night' => HotelOffersValidationHelpers::validatePricePerNight()['rules'],
-            'location' => HotelOffersValidationHelpers::validateLocation()['rules'],
-            'availability' => HotelOffersValidationHelpers::validateAvailability()['rules'],
-            'amenities' => HotelOffersValidationHelpers::validateAmenities()['rules'],
-            'photos' => HotelOffersValidationHelpers::validatePhotos()['rules'],
+            'available_from' => HotelOffersValidationHelpers::validateAvailableFrom()['rules'],
+            'available_until' => HotelOffersValidationHelpers::validateAvailableUntil()['rules'],
+
         ], array_merge(
-            HotelOffersValidationHelpers::validateHotelName()['messages'],
+            HotelOffersValidationHelpers::validateCompanyId()['messages'],
+            HotelOffersValidationHelpers::validateRoomId($data)['messages'],
             HotelOffersValidationHelpers::validatePricePerNight()['messages'],
-            HotelOffersValidationHelpers::validateLocation()['messages'],
-            HotelOffersValidationHelpers::validateAvailability()['messages'],
-            HotelOffersValidationHelpers::validateAmenities()['messages'],
-            HotelOffersValidationHelpers::validatePhotos()['messages']
+            HotelOffersValidationHelpers::validateAvailableFrom()['messages'],
+            HotelOffersValidationHelpers::validateAvailableUntil()['messages'],
         ));
 
         if ($validator->fails()) {
@@ -81,38 +80,54 @@ class HotelOffersController extends Controller
         return response()->json($offer, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /** 
+        * Update the specified resource in storage.
+    */
     public function update(Request $request, $id)
     {
         $offer = HotelOffers::find($id);
-
+    
         if (!$offer) {
             return response()->json([
                 'message' => 'Oferta de hotel no encontrada',
                 'status' => 404
             ], 404);
         }
-
+    
         $data = $request->all();
+    
+       
+        $rules = [];
+        $messages = [];
+    
+        if ($request->has('company_id')) {
+            $rules['company_id'] = HotelOffersValidationHelpers::validateCompanyId()['rules'];
+            $messages = array_merge($messages, HotelOffersValidationHelpers::validateCompanyId()['messages']);
+        }
+    
+        if ($request->has('room_id')) {
+            $rules['room_id'] = HotelOffersValidationHelpers::validateRoomId($data)['rules'];
+            $messages = array_merge($messages, HotelOffersValidationHelpers::validateRoomId($data)['messages']);
+        }
+    
+        if ($request->has('price_per_night')) {
+            $rules['price_per_night'] = HotelOffersValidationHelpers::validatePricePerNight()['rules'];
+            $messages = array_merge($messages, HotelOffersValidationHelpers::validatePricePerNight()['messages']);
+        }
+    
+        if ($request->has('available_from')) {
+            $rules['available_from'] = HotelOffersValidationHelpers::validateAvailableFrom()['rules'];
+            $messages = array_merge($messages, HotelOffersValidationHelpers::validateAvailableFrom()['messages']);
+        }
+    
+        if ($request->has('available_until')) {
+            $rules['available_until'] = HotelOffersValidationHelpers::validateAvailableUntil()['rules'];
+            $messages = array_merge($messages, HotelOffersValidationHelpers::validateAvailableUntil()['messages']);
+        }
+    
         
-        $validator = Validator::make($data, [
-            'hotel_name' => $request->has('hotel_name') ? HotelOffersValidationHelpers::validateHotelName()['rules'] : '',
-            'price_per_night' => $request->has('price_per_night') ? HotelOffersValidationHelpers::validatePricePerNight()['rules'] : '',
-            'location' => $request->has('location') ? HotelOffersValidationHelpers::validateLocation()['rules'] : '',
-            'availability' => $request->has('availability') ? HotelOffersValidationHelpers::validateAvailability()['rules'] : '',
-            'amenities' => $request->has('amenities') ? HotelOffersValidationHelpers::validateAmenities()['rules'] : '',
-            'photos' => $request->has('photos') ? HotelOffersValidationHelpers::validatePhotos()['rules'] : '',
-        ], array_merge(
-            HotelOffersValidationHelpers::validateHotelName()['messages'],
-            HotelOffersValidationHelpers::validatePricePerNight()['messages'],
-            HotelOffersValidationHelpers::validateLocation()['messages'],
-            HotelOffersValidationHelpers::validateAvailability()['messages'],
-            HotelOffersValidationHelpers::validateAmenities()['messages'],
-            HotelOffersValidationHelpers::validatePhotos()['messages']
-        ));
-
+        $validator = Validator::make($data, $rules, $messages);
+    
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Datos de actualización inválidos',
@@ -120,15 +135,34 @@ class HotelOffersController extends Controller
                 'status' => 400
             ], 400);
         }
-
-        $offer->update($data);
-
+    
+       
+        if ($request->has('company_id')) {
+            $offer->company_id = $data['company_id'];
+        }
+        if ($request->has('room_id')) {
+            $offer->room_id = $data['room_id'];
+        }
+        if ($request->has('price_per_night')) {
+            $offer->price_per_night = $data['price_per_night'];
+        }
+        if ($request->has('available_from')) {
+            $offer->available_from = $data['available_from'];
+        }
+        if ($request->has('available_until')) {
+            $offer->available_until = $data['available_until'];
+        }
+    
+       
+        $offer->save();
+    
         return response()->json([
             'message' => 'Oferta de hotel actualizada exitosamente',
             'offer' => $offer,
             'status' => 200
         ], 200);
     }
+    
 
     /**
      * Remove the specified resource from storage.

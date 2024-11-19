@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('hotel_offers', function (Blueprint $table) {
             $table->bigIncrements('id');  
-            $table->unsignedBigInteger('company_id'); 
-            $table->unsignedBigInteger('room_id');     
+            $table->string('company_id', 255); 
+            $table->string('room_id');     
             $table->decimal('price_per_night', 8, 2);  
             $table->date('available_from');            
             $table->date('available_until');           

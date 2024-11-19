@@ -34,9 +34,7 @@ Route::get('/plan/{id}', [PlanController::class, 'show']);
  Route::get('/auth', [AuthenticationController::class, 'index']);
 
 Route::post('/auth/create', [AuthenticationController::class, 'store']);
-
 Route::post('/auth/login', [AuthenticationController::class, 'authenticate']);
-
 Route::patch('/auth/update/{id}', [AuthenticationController::class, 'update']);
 
 
@@ -51,5 +49,9 @@ Route::patch('/room/update/{id}', [RoomController::class, 'update']);
 Route::delete('/room/delete/{id}', [RoomController::class, 'destroy']);
 
 
-// El laborar las rutas para usar los meotod de las ofertas de hotel 
+
+Route::get('/hotel_offers', [HotelOffersController::class, 'index']); 
+Route::get('/hotel_offers/{id}', [HotelOffersController::class, 'show']); 
 Route::post('/hotel_offers/create', [HotelOffersController::class, 'store']);
+Route::patch('/hotel_offers/update/{id}', [HotelOffersController::class, 'update']);
+Route::delete('/hotel_offers/delete/{id}', [HotelOffersController::class, 'destroy']);

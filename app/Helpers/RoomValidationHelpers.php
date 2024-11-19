@@ -102,12 +102,12 @@ class RoomValidationHelpers
             'rules' => [
                 'required',
                 'string',
-                'regex:/^(\S+\.\w+)(~\S+\.\w+)*$/',
+                'regex:/^(https?:\/\/\S+\.\w+)(,\s*https?:\/\/\S+\.\w+)*$/',
             ],
             'messages' => [
                 'photos.required' => 'Las fotos son obligatorias.',
                 'photos.string' => 'El campo de fotos debe ser una cadena de texto.',
-                'photos.regex' => 'Las fotos deben estar en formato de URLs válidas, separadas por el símbolo ~ si son múltiples (Ejemplo: Foto1.png~Foto2.jpg~foto3.jpeg).',
+                'photos.regex' => 'Las fotos deben estar en formato de URLs válidas, separadas por el símbolo , si son múltiples (Ejemplo: Foto1.png, Foto2.jpg, foto3.jpeg).',
             ],
         ];
     }

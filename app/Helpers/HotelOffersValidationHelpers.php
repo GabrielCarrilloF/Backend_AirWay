@@ -3,23 +3,11 @@
 namespace App\Helpers;
 
 use App\Models\Room;
-use Carbon\Carbon;
+use App\Traits\CompanyValidationTrait;
 
 class HotelOffersValidationHelpers
 {
-    public static function validateCompanyId()
-    {
-        return [
-            'rules' => [
-                'required',
-                'exists:companies,id',
-            ],
-            'messages' => [
-                'company_id.required' => 'El ID de la compañía es obligatorio.',
-                'company_id.exists' => 'El ID de la compañía debe existir en la tabla de compañías.',
-            ],
-        ];
-    }
+    use CompanyValidationTrait;
 
     public static function validateRoomId($data)
     {
