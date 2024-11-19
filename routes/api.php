@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\HotelOffersController;
 
 Route::get('/companies', [CompanyController::class, 'index']);
 
@@ -30,7 +31,7 @@ Route::get('/plan/{id}', [PlanController::class, 'show']);
 
 
 
-// Route::get('/auth', [AuthenticationController::class, 'index']);
+ Route::get('/auth', [AuthenticationController::class, 'index']);
 
 Route::post('/auth/create', [AuthenticationController::class, 'store']);
 
@@ -51,3 +52,4 @@ Route::delete('/room/delete/{id}', [RoomController::class, 'destroy']);
 
 
 // El laborar las rutas para usar los meotod de las ofertas de hotel 
+Route::post('/hotel_offers/create', [HotelOffersController::class, 'store']);

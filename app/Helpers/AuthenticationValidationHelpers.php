@@ -60,11 +60,11 @@ class AuthenticationValidationHelpers
     {
         return [
             'rules' => [
-                'date',
+                'required',
                 'date_format:Y-d-m'
             ],
             'messages' => [
-                'last_access_date.date' => 'La fecha debe ser válida.',
+                'last_access_date.required' => 'La fecha debe es obligatoria.',
                 'last_access_date.date_format' => 'La fecha debe estar en el formato YYYY-DD-MM.',
             ]
         ];
