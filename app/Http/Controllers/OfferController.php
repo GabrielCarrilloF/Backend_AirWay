@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HotelOffers;
 use App\Models\TransportationOffer;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -21,8 +22,8 @@ class OfferController extends Controller
             'origin' => 'nullable|string',
             'destination' => 'nullable|string',
             'departure_date' => 'nullable|date',
-            'return_date' => 'nullable|date',
             'type' => 'required|string|in:hotel,transportation',
+            'vehicle_type' => 'nullable|string|in:bus,airplane', // Nuevo campo para el tipo de vehículo
         ]);
 
         $type = $validated['type'];
@@ -31,7 +32,7 @@ class OfferController extends Controller
             // Buscar ofertas de hoteles
             $offers = HotelOffers::query()
                 ->whereDate('available_from', '<=', $validated['departure_date'])
-                ->whereDate('available_until', '>=', $validated['return_date'])
+                ->whereDate('available_until', '>=', $validated['departure_date'])
                 ->get();
 
         } elseif ($type === 'transportation') {
@@ -45,6 +46,12 @@ class OfferController extends Controller
                 })
                 ->when(isset($validated['departure_date']), function ($query) use ($validated) {
                     $query->whereDate('departure_date', $validated['departure_date']);
+                })
+                ->when(isset($validated['vehicle_type']), function ($query) use ($validated) {
+                    // Filtrar por tipo de vehículo: bus o avión
+                    $query->whereHas('vehicle', function ($vehicleQuery) use ($validated) {
+                        $vehicleQuery->where('vehicle_type', $validated['vehicle_type']);
+                    });
                 })
                 ->get();
         } else {
