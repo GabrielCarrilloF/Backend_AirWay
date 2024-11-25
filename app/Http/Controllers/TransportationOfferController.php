@@ -72,7 +72,7 @@ class TransportationOfferController extends Controller
    
     public function show($id_vehicle)
     {
-        $offers = TransportationOffer::where('id_vehicle', $id_vehicle)->get();
+        $offers = TransportationOffer::where('id', $id_vehicle)->get();
 
         if ($offers->isEmpty()) {
             return response()->json([
