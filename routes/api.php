@@ -8,6 +8,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\HotelOffersController;
+use App\Http\Controllers\OfferController;
 
 Route::get('/companies', [CompanyController::class, 'index']);
 
@@ -55,3 +56,5 @@ Route::get('/hotel_offers/{id}', [HotelOffersController::class, 'show']);
 Route::post('/hotel_offers/create', [HotelOffersController::class, 'store']);
 Route::patch('/hotel_offers/update/{id}', [HotelOffersController::class, 'update']);
 Route::delete('/hotel_offers/delete/{id}', [HotelOffersController::class, 'destroy']);
+
+Route::post('/search-offers', [OfferController::class, 'searchOffers']);
