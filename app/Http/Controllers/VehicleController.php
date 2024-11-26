@@ -93,6 +93,22 @@ class VehicleController extends Controller
         ], 200);
     }
 
+    public function showVivle($vehicle_registration)
+    {
+        
+       $Vehicles = Vehicle::find($vehicle_registration);
+        if (!$Vehicles) {
+            return response()->json(['error' => 'Vehicle not found'], 404);
+        }
+
+        // Obtén los vehiculos asociados a la compañía
+        $Vehicles = Vehicle::where('vehicle_registration', $vehicle_registration)->get();
+
+        return response()->json([
+            'Vehicles' => $Vehicles
+        ], 200);
+    }
+
     
     public function update(Request $request, $vehicle_registration)
     {

@@ -38,6 +38,7 @@ php artisan migrate --path=/database/migrations/2024_11_09_215947_create_vehicle
 php artisan migrate --path=/database/migrations/2024_11_09_221025_create_transportation_offers_table.php
 php artisan migrate --path=/database/migrations/2024_11_09_222001_create_rooms_table.php
 php artisan migrate --path=/database/migrations/2024_11_13_203140_create_hotel_offers_table.php
+php artisan migrate --path=/database/migrations/2024_11_26_191103_create_reservas_table.php
 echo =========================================================
 php artisan migrate
 
